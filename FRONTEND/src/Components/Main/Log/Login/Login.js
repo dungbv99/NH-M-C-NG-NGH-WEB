@@ -51,7 +51,7 @@ export default class Login extends React.Component {
   checkValidateLoginForm = type => {
     switch (type) {
       case "invalid":
-        return <span>Tên đăng nhập hoặc mật khẩu của bạn không đúng !!!</span>;
+        return <span>Tài khoản hoặc mật khẩu của bạn không đúng !!!</span>;
       case "success-login":
         return <span>Bạn đã đăng nhập thành công !!!</span>;
       case "username":
@@ -75,7 +75,7 @@ export default class Login extends React.Component {
         PassWord: this.state.PassWord
       })
       .then(res => {
-        console.log("res ", res);
+        // console.log(res.data);
         this.setState({
           checkValidate: res.data.checkValidate
         });

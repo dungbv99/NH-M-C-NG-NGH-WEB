@@ -9,21 +9,21 @@ export default class TeamsAllList extends React.Component {
     this.state = { AllTeamList: [] };
   }
 
-  componentDidMount = () => {
-    // axios
-    //   .post("/getteamlist", {
-    //     MemberID: this.props.MemberID
-    //   })
-    //   .then(res => {
-    //     // console.log(res.data);
-    //     this.setState({
-    //       AllTeamList: res.data
-    //     });
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-  };
+  // componentDidMount = () => {
+  //   axios
+  //     .post("/getteamlist", {
+  //       MemberID: this.props.MemberID
+  //     })
+  //     .then(res => {
+  //       // console.log(res.data);
+  //       this.setState({
+  //         AllTeamList: res.data
+  //       });
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     });
+  // };
 
   chooseOneJoinedTeam = TeamID => {
     this.props.getTeamIDMemberChoice(TeamID);

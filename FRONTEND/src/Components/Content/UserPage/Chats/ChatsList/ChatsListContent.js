@@ -1,5 +1,5 @@
 import React from "react";
-import avatar from "../../../../Main/Image-Icons/default-avatar.png";
+import avatar from "../../../../Main/Image-Icons/default-avatar.PNG";
 
 export default class ChatsListContent extends React.Component {
   constructor(props) {

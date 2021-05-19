@@ -24,16 +24,16 @@ export default class ExcercisesCreateNew extends React.Component {
   };
 
   setExcerciseContentToCreateQAContent = (
-    ExcerciseName,
-    ExcerciseNumberQuestion,
-    ExcerciseType,
-    ExcerciseLogo
+    excerciseName,
+    excerciseNumberQuestion,
+    excerciseType,
+    excerciseLogo
   ) => {
     this.setState({
-      ExcerciseName: ExcerciseName,
-      ExcerciseNumberQuestion: ExcerciseNumberQuestion,
-      ExcerciseType: ExcerciseType,
-      ExcerciseLogo: ExcerciseLogo
+      ExcerciseName: excerciseName,
+      ExcerciseNumberQuestion: excerciseNumberQuestion,
+      ExcerciseType: excerciseType,
+      ExcerciseLogo: excerciseLogo
     });
   };
 
@@ -94,7 +94,7 @@ export default class ExcercisesCreateNew extends React.Component {
 
   render() {
     return (
-      <div className="user-Excercises_create-new">
+      <div className="user-excercises_create-new">
         {this.renderExcerciseCreateNewControlContent()}
       </div>
     );

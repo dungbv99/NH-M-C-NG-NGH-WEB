@@ -10,8 +10,9 @@ import UserMenu from "./UserMenu";
 export default class UserDashBoard extends React.Component {
   constructor(props) {
     super(props);
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxx  ", props)
     this.state = {
-      contentState: "teams",
+      contentState: "excercises",
       FirstnameMember: "",
       LastnameMember: "",
       checkJoinCall: "false",
@@ -33,19 +34,20 @@ export default class UserDashBoard extends React.Component {
   };
 
   componentDidMount = () => {
-    console.log("this.props.MemberID ", this.props.MemberID)
+    console.log("this.props.MemberID  ", this.props.MemberID);
     axios
       .post("/getfullname/", {
         MemberID: this.props.MemberID
       })
       .then(res => {
-        console.log("getfullname res ", res);
+        console.log("...................... ",res.data);
         this.setState({
           FirstnameMember: res.data.Firstname,
           LastnameMember: res.data.Lastname
         });
       })
       .catch(error => {
+        console.log("111111111");
         console.log(error);
       });
 
@@ -54,16 +56,16 @@ export default class UserDashBoard extends React.Component {
     //   // data: "Sao méo nhận được"
     // });
 
-  //   this.props.socket.on("confirm-joined-call-team", data => {
-  //     // console.log("check ra data " + data);
-  //     if (this.props.socket.id === data.MemberSocketID) {
-  //       // console.log("có vào nha");
-  //       this.setState({
-  //         checkJoinCall: "true",
-  //         TeamCallID: data.TeamCallID
-  //       });
-  //     }
-  //   });
+    // this.props.socket.on("confirm-joined-call-team", data => {
+    //   // console.log("check ra data " + data);
+    //   if (this.props.socket.id === data.MemberSocketID) {
+    //     // console.log("có vào nha");
+    //     this.setState({
+    //       checkJoinCall: "true",
+    //       TeamCallID: data.TeamCallID
+    //     });
+    //   }
+    // });
   };
 
   renderUserDashBoard = () => {

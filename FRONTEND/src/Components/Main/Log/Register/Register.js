@@ -91,8 +91,6 @@ export default class Register extends React.Component {
         Gender: this.state.Gender
       })
       .then(res => {
-        console.log("res ", res);
-        console.log("validate ", res.data.checkValidate);
         // console.log(res.data);
         this.setState({
           checkValidate: res.data.checkValidate
@@ -104,7 +102,6 @@ export default class Register extends React.Component {
         }
       })
       .catch(error => {
-        console.log("catch");
         console.log(error);
       });
   };

@@ -119,25 +119,25 @@ export default class ExcercisesQAndAContent extends React.Component {
   };
 
   getAllQAContentToExcerciseContent = (
-    ExcerciseNthQuestion,
-    ExcerciseQuestionContent,
-    ExcerciseAnswerContentA,
-    ExcerciseAnswerContentB,
-    ExcerciseAnswerContentC,
-    ExcerciseAnswerContentD,
-    ExcerciseCorrectAnswer
+    excerciseNthQuestion,
+    excerciseQuestionContent,
+    excerciseAnswerContentA,
+    excerciseAnswerContentB,
+    excerciseAnswerContentC,
+    excerciseAnswerContentD,
+    excerciseCorrectAnswer
   ) => {
     let QAContent = {
-      ExcerciseNthQuestion: ExcerciseNthQuestion,
-      ExcerciseQuestionContent: ExcerciseQuestionContent,
-      ExcerciseAnswerContentA: ExcerciseAnswerContentA,
-      ExcerciseAnswerContentB: ExcerciseAnswerContentB,
-      ExcerciseAnswerContentC: ExcerciseAnswerContentC,
-      ExcerciseAnswerContentD: ExcerciseAnswerContentD,
-      ExcerciseCorrectAnswer: ExcerciseCorrectAnswer
+      ExcerciseNthQuestion: excerciseNthQuestion,
+      ExcerciseQuestionContent: excerciseQuestionContent,
+      ExcerciseAnswerContentA: excerciseAnswerContentA,
+      ExcerciseAnswerContentB: excerciseAnswerContentB,
+      ExcerciseAnswerContentC: excerciseAnswerContentC,
+      ExcerciseAnswerContentD: excerciseAnswerContentD,
+      ExcerciseCorrectAnswer: excerciseCorrectAnswer
     };
     let nthindex = this.state.ExcerciseQAContent.findIndex(questitem => {
-      return questitem.ExcerciseNthQuestion === ExcerciseNthQuestion;
+      return questitem.ExcerciseNthQuestion === excerciseNthQuestion;
     });
     if (nthindex >= 0) {
       this.state.ExcerciseQAContent.splice(nthindex, 1, QAContent);
@@ -153,16 +153,21 @@ export default class ExcercisesQAndAContent extends React.Component {
   };
 
   sendAllQAndAExcerciseContent = () => {
+    console.log("this.state.ExcerciseQAContent ",this.state.ExcerciseQAContent);
+    console.log("this.state.ExcerciseName ",this.props.ExcerciseName);
     axios
-      .post("/createnewExcercisecontent", {})
+      .post("/updateexcerciseqa/", {
+        ExcerciseName: this.props.ExcerciseName,
+        ExcerciseQAContent: this.state.ExcerciseQAContent
+      })
       .then(res => {
-        console.log("...................",res.data);
+        // console.log(res.data);
         this.setState({
           checkValidate: res.data.checkValidate
         });
-        if (res.data.checkValidate === "success-create-Excercise-content") {
+        if (res.data.checkValidate === "success-create-excercise-content") {
           setTimeout(() => {
-            this.props.updateRenderExcerciseControl("Excerciseall");
+            this.props.updateRenderExcerciseControl("excerciseall");
           }, 1000);
         }
       })
@@ -172,19 +177,20 @@ export default class ExcercisesQAndAContent extends React.Component {
   };
 
   sendToCompleteExcercises = () => {
-    if (
-      this.state.ExcerciseQAContent.length() !==
-      this.props.ExcerciseNumberQuestion
-    ) {
+    console.log("this.state.ExcerciseQAContent.length ", this.state.ExcerciseQAContent.length );
+    console.log("this.props.ExcerciseNumberQuestion ", this.props.ExcerciseNumberQuestion);
+    if (this.state.ExcerciseQAContent.length != this.props.ExcerciseNumberQuestion) {
+      console.log("1");
       this.openCheckCompleteExcerciseModal();
     } else {
+      console.log("2");
       this.sendAllQAndAExcerciseContent();
     }
   };
 
-  ExcerciseQAndAControl = () => {
+  excerciseQAndAControl = () => {
     return (
-      <div className="user-Excercises_create-new__QandA___control">
+      <div className="user-excercises_create-new__QandA___control">
         <div>
           <i
             style={
@@ -274,7 +280,7 @@ export default class ExcercisesQAndAContent extends React.Component {
 
   createNewExcerciseQAContent = () => {
     return (
-      <div className="user-Excercises_create-new__QandA">
+      <div className="user-excercises_create-new__QandA">
         <ExcercisesQAndAMainInfor
           MemberID={this.props.MemberID}
           socket={this.props.socket}
@@ -289,7 +295,7 @@ export default class ExcercisesQAndAContent extends React.Component {
         />
 
         {this.renderExcercisesQAndAContentItem()}
-        {this.ExcerciseQAndAControl()}
+        {this.excerciseQAndAControl()}
       </div>
     );
   };

@@ -11,15 +11,15 @@ export default class ExcercisesAllContent extends React.Component {
 
   render() {
     return (
-      <div className="user-Excercises_all">
-        <div className="user-Excercises_all__control">
-          <div className="user-Excercises_all__control___title">
+      <div className="user-excercises_all">
+        <div className="user-excercises_all__control">
+          <div className="user-excercises_all__control___title">
             <p>Bộ đề - Bài tập trắc nghiệm</p>
           </div>
-          <div className="user-Excercises_all__control___button">
+          <div className="user-excercises_all__control___button">
             <button
               onClick={() =>
-                this.props.updateRenderExcerciseControl("createExcercisenew")
+                this.props.updateRenderExcerciseControl("createexcercisenew")
               }
             >
               Tạo Bộ đề - Bài tập mới
@@ -30,6 +30,9 @@ export default class ExcercisesAllContent extends React.Component {
           MemberID={this.props.MemberID}
           socket={this.props.socket}
           updateRenderExcerciseControl={this.props.updateRenderExcerciseControl}
+          getExcerciseIDAndTimeMemberChoice={
+            this.props.getExcerciseIDAndTimeMemberChoice
+          }
         />
       </div>
     );

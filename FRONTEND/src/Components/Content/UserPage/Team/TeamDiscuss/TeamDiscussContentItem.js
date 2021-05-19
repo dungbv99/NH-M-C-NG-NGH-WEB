@@ -1,5 +1,5 @@
 import React from "react";
-import defaultavatar from "../../../../Main/Image-Icons/default-avatar.png";
+import defaultavatar from "../../../../Main/Image-Icons/default-avatar.PNG";
 import TeamDiscussContentReplyInput from "./TeamDiscussContentReplyInput";
 
 export default class TeamDiscussContent extends React.Component {

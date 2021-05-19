@@ -1,6 +1,6 @@
 import React from "react";
-import defaultavatar from "./../../Image-Icons/default-avatar.png";
-import logopage from "./../../Image-Icons/logo.png";
+import defaultavatar from "../../Image-Icons/default-avatar.PNG";
+import logopage from "../../Image-Icons/logo.PNG";
 
 export default class UserHeader extends React.Component {
   constructor(props) {
@@ -35,9 +35,9 @@ export default class UserHeader extends React.Component {
         <div className="user-dashboard_header__logo">
           <img src={logopage} alt="logo-webpage" />
         </div>
-        <div className="user-dashboard_header__search">
-          <input type="text" placeholder=" Tìm kiếm tên nhóm..." />
-        </div>
+        {/*<div className="user-dashboard_header__search">*/}
+        {/*  <input type="text" placeholder=" Tìm kiếm tên nhóm..." />*/}
+        {/*</div>*/}
         <div className="user-dashboard_header__infor">
           <div className="user-dashboard_header__infor___avatar">
             <img src={defaultavatar} alt="default-avatar" />

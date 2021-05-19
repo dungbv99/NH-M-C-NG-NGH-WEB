@@ -1,6 +1,6 @@
 import React from "react";
 import Draggable from "react-draggable";
-import defaultavatar from "../../../../Main/Image-Icons/default-avatar.png";
+import defaultavatar from "../../../../Main/Image-Icons/default-avatar.PNG";
 
 export default class TeamMemberChat extends React.Component {
   constructor(props) {

@@ -1,5 +1,5 @@
 import React from "react";
-import defaultavatar from "../../../../Main/Image-Icons/default-avatar.png";
+import defaultavatar from "../../../../Main/Image-Icons/default-avatar.PNG";
 
 export default class ChatsContentMenu extends React.Component {
   constructor(props) {
