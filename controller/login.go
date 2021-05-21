@@ -11,7 +11,7 @@ import (
 )
 
 func Login(c *routefw.Context){
-	fmt.Println("login")
+	//fmt.Println("login")
 	user := &newModel.User{}
 	err := c.DecodeJson(user)
 
@@ -20,7 +20,7 @@ func Login(c *routefw.Context){
 		return
 	}
 
-	fmt.Println("user ", user)
+	//fmt.Println("user ", user)
 
 	filter := bson.D{
 		{
@@ -61,7 +61,7 @@ func Login(c *routefw.Context){
 	//	"access_token":  ts.AccessToken,
 	//	"refresh_token": ts.RefreshToken,
 	//}
-	fmt.Println("ok")
+	//fmt.Println("ok")
 	responseLogin := newModel.ResponseLogin{
 		CheckValidate: "success-login",
 		MemberID:      u.ID,

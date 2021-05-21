@@ -52,7 +52,15 @@ func Client() *mongo.Client{
 func InsertOne(collectionName string, data interface{}) (err error){
 	collection := Client().Database(DB_NAME).Collection(collectionName)
 	_, err = collection.InsertOne(CTX, data)
-	fmt.Println(data)
+	//fmt.Println(data)
+	return
+}
+
+
+func InsertOneGetResult(collectionName string, data interface{}) (err error, result *mongo.InsertOneResult){
+	collection := Client().Database(DB_NAME).Collection(collectionName)
+	result, err = collection.InsertOne(CTX, data)
+	//fmt.Println("333333333333333 ", result)
 	return
 }
 

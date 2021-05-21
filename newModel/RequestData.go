@@ -8,6 +8,7 @@ type RequestDataGetFullName struct {
 	MemberID		primitive.ObjectID `json:"MemberID"`
 }
 
-type RequestDataIdExercise struct {
+type RequestDataIdMongo struct {
 	ID 			primitive.ObjectID			`json:"id"`
 }
+

@@ -10,13 +10,13 @@ import (
 )
 
 func CreateNewExerciseContent(c *routefw.Context){
-	fmt.Println("CreateNewExerciseContent")
+	//fmt.Println("CreateNewExerciseContent")
 	Excercise := &newModel.Excercise{}
 	err := c.DecodeJson(Excercise)
 	if err != nil{
 		fmt.Println("err ", err)
 	}
-	fmt.Println("exercise", Excercise)
+	//fmt.Println("exercise", Excercise)
 
 	filter := bson.D{
 		{
@@ -24,7 +24,7 @@ func CreateNewExerciseContent(c *routefw.Context){
 		},
 	}
 	err = db.FindOne("Excercise", filter).Err()
-	fmt.Println("err ", err)
+	//fmt.Println("err ", err)
 	if err == nil{
 		fmt.Println("err ", err)
 		response := newModel.ResponseValidate{CheckValidate: "exist"}

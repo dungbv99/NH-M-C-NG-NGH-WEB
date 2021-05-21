@@ -1,4 +1,4 @@
-package model
+package newModel
 
 type TokenDetails struct {
 	AccessToken  		string	 		`json:"access_token" bson:"access_token"`

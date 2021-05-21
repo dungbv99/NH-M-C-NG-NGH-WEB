@@ -13,7 +13,7 @@ func GetAllExercises(c *routefw.Context){
 	if err != nil{
 		fmt.Println("err ", err)
 	}
-	fmt.Println("exercise ", exercises)
+	//fmt.Println("exercise ", exercises)
 	list := newModel.ListExercise{
 		List: exercises,
 	}

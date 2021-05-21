@@ -10,8 +10,8 @@ import (
 )
 
 func GetExerciseById(c * routefw.Context){
-	fmt.Println("GetExerciseById")
-	idEx := &newModel.RequestDataIdExercise{}
+	//fmt.Println("GetExerciseById")
+	idEx := &newModel.RequestDataIdMongo{}
 	err := c.DecodeJson(idEx)
 	if err != nil{
 		fmt.Println("err ", err)

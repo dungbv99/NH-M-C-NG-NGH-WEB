@@ -10,10 +10,10 @@ import (
 )
 
 func UpdateExcerciseQA(c *routefw.Context){
-	fmt.Println("update exercise ")
+	//fmt.Println("update exercise ")
 	excercise := &newModel.Excercise{}
 	c.DecodeJson(excercise)
-	fmt.Println("excercise ",excercise)
+	//fmt.Println("excercise ",excercise)
 	filter := bson.D{
 		{
 			"ExcerciseName",excercise.ExcerciseName,

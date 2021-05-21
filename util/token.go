@@ -11,13 +11,13 @@ import (
 	"strings"
 	"time"
 	"web/db"
-	"web/model"
+	"web/newModel"
 )
 
 
-func CreateToken(userId primitive.ObjectID)(*model.TokenDetails,  error){
+func CreateToken(userId primitive.ObjectID)(*newModel.TokenDetails,  error){
 	tdAccessUuid := uuid.NewV4().String()
-	td := &model.TokenDetails{
+	td := &newModel.TokenDetails{
 		AccessUuid:   tdAccessUuid,
 		RefreshUuid:  tdAccessUuid + "++" +userId.String(),
 		AtExpires:    time.Now().Add(time.Hour).Unix(),
@@ -48,10 +48,10 @@ func CreateToken(userId primitive.ObjectID)(*model.TokenDetails,  error){
 	return td, nil
 }
 
-func CreateAuth(userId string, details *model.TokenDetails) error{
+func CreateAuth(userId string, details *newModel.TokenDetails) error{
 	now := time.Now()
 	//db.InsertOne("exam", "token_accessuuid", strconv.Itoa(userId))
-	access := model.AccessToken{
+	access := newModel.AccessToken{
 		UserId:     userId,
 		AccessUuid: details.AccessUuid,
 		CreateAt:   now.String(),
@@ -60,7 +60,7 @@ func CreateAuth(userId string, details *model.TokenDetails) error{
 	if err != nil{
 		return err
 	}
-	refresh := model.RefreshToken{
+	refresh := newModel.RefreshToken{
 		UserID:      userId,
 		RefreshUuid: details.RefreshUuid,
 		CreateAt:    now.String(),
@@ -92,7 +92,7 @@ func VerifyToken(r *http.Request) (*jwt.Token, error) {
 	return token, nil
 }
 
-func ExtractTokenMetadata(r *http.Request) (*model.AccessToken, error) {
+func ExtractTokenMetadata(r *http.Request) (*newModel.AccessToken, error) {
 	token, err := VerifyToken(r)
 	if err != nil {
 		return nil, err
@@ -108,7 +108,7 @@ func ExtractTokenMetadata(r *http.Request) (*model.AccessToken, error) {
 		if err != nil {
 			return nil, err
 		}
-		return &model.AccessToken{
+		return &newModel.AccessToken{
 			AccessUuid: accessUuid,
 			UserId:   claims["access_uuid"].(string),
 		}, nil
@@ -116,7 +116,7 @@ func ExtractTokenMetadata(r *http.Request) (*model.AccessToken, error) {
 	return nil, err
 }
 
-func DeleteTokens(token *model.AccessToken) error{
+func DeleteTokens(token *newModel.AccessToken) error{
 	filter := bson.D{
 		{
 			"user_id", token.UserId,

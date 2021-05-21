@@ -16,3 +16,9 @@ type ResponseLogin struct {
 type ResponseExercise struct {
 	Exercise 			Excercise				`json:"exercise"`
 }
+
+
+type ExcerciseMemberDoResult struct {
+	CheckValidate		string 					`json:"checkValidate"`
+	ExcerciseDidID		primitive.ObjectID		`json:"ExcerciseDidID"`
+}
