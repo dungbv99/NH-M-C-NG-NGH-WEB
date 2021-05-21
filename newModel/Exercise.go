@@ -16,7 +16,7 @@ type Excercise struct {
 }
 
 type ExcerciseQAContent struct {
-	ExcerciseNthQuestion		int						`json:"ExcerciseNthQuestion" bson:"ExcerciseNthQuestion"`
+	ExcerciseNthQuestion		string					`json:"ExcerciseNthQuestion" bson:"ExcerciseNthQuestion"`
 	ExcerciseQuestionContent	string					`json:"ExcerciseQuestionContent" bson:"ExcerciseQuestionContent"`
 	ExcerciseAnswerContentA		string					`json:"ExcerciseAnswerContentA" bson:"ExcerciseAnswerContentA"`
 	ExcerciseAnswerContentB		string					`json:"ExcerciseAnswerContentB" bson:"ExcerciseAnswerContentB"`

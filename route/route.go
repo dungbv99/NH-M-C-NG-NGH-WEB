@@ -114,6 +114,12 @@ var routers = []MyRoute{
 		method: "get",
 		handler: controller.GetAllExercises,
 	},
+	{
+		name: 	"get all exercises",
+		path:  	"/getExerciseById/",
+		method: "post",
+		handler: controller.GetExerciseById,
+	},
 }
 
 

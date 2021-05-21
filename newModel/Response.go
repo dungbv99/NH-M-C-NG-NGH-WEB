@@ -12,3 +12,7 @@ type ResponseLogin struct {
 	AccessToken    		string					`json:"AccessToken"`
 	RefreshToken 		string					`json:"RefreshToken"`
 }
+
+type ResponseExercise struct {
+	Exercise 			Excercise				`json:"exercise"`
+}
