@@ -22,3 +22,17 @@ type ExcerciseMemberDoResult struct {
 	CheckValidate		string 					`json:"checkValidate"`
 	ExcerciseDidID		primitive.ObjectID		`json:"ExcerciseDidID"`
 }
+
+type ResponseExerciseAnswerUser struct {
+	ExerciseAnswerUser			ExerciseAnswerUser			`json:"ExerciseAnswerUser"`
+}
+
+type ResponseUserExerciseResult struct {
+	ExcerciseName						string					`json:"ExcerciseName" `
+	ExcerciseDescription				string					`json:"ExcerciseDescription" `
+	ExcerciseLogo						string					`json:"ExcerciseLogo" `
+	ExcerciseNumberQuestion				string					`json:"ExcerciseNumberQuestion" `
+	ExcerciseQAContent					[]ExcerciseQAContent	`json:"ExcerciseQAContent" `
+	ExcerciseAllAnswerContent			[]ExerciseAnswerContent	`json:"ExcerciseAllAnswerContent" "`
+
+}

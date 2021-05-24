@@ -12,3 +12,7 @@ type RequestDataIdMongo struct {
 	ID 			primitive.ObjectID			`json:"id"`
 }
 
+type UserExerciseId struct {
+	ExcerciseID				primitive.ObjectID				`json:"ExcerciseID"`
+	UserID					primitive.ObjectID				`json:"UserID"`
+}
