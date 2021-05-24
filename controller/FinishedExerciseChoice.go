@@ -52,6 +52,10 @@ func FinishedExerciseChoice(c *routefw.Context){
 		exerciseAnswerUser.ExcerciseName = exercise.ExcerciseName
 		exerciseAnswerUser.ExcerciseNumberQuestion = exercise.ExcerciseNumberQuestion
 		exerciseAnswerUser.ExcerciseDescription = exercise.ExcerciseDescription
+		exerciseAnswerUser.DoTime = 1
+		exerciseAnswerUser.S = score
+		name, _ := db.GetFieldValue("user", bson.D{{"_id",exerciseAnswerUser.UserId}}, "UserName")
+		exerciseAnswerUser.Name = name.(string)
 		//fmt.Println("exerciseAnswerUser     " , exerciseAnswerUser)
 		err, r := db.InsertOneGetResult("ExerciseAnswerUser", exerciseAnswerUser)
 		//fmt.Println("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn r", r.InsertedID)
@@ -87,6 +91,8 @@ func FinishedExerciseChoice(c *routefw.Context){
 			"$set": bson.M{
 				"Score": strconv.Itoa(score)+"/"+exercise.ExcerciseNumberQuestion,
 				"ExcerciseAllAnswerContent": exerciseAnswerUser.ExcerciseAllAnswerContent,
+				"DoTime": eau.DoTime+1,
+				"S": score,
 			},
 		}
 		filter = bson.D{

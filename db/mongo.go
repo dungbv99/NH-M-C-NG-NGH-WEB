@@ -159,3 +159,23 @@ func FindAllExercise() ([]newModel.Excercise, error){
 	cur.All(CTX, &exercises)
 	return exercises, nil
 }
+
+func Count(colName string, filter interface{}) (int64, error){
+	return Client().Database(DB_NAME).Collection(colName).CountDocuments(CTX,filter)
+}
+
+func GetFieldValue(colName string, filter interface{}, fieldName string)(interface{}, error){
+	v, err := Client().Database(DB_NAME).Collection(colName).Distinct(CTX, fieldName, filter)
+	return v[0], err
+}
+
+func FindExerciseAnswerUser(filter interface{},  opts *options.FindOptions)([]newModel.ExerciseAnswerUser, error) {
+	cur, err := Client().Database(DB_NAME).Collection("ExerciseAnswerUser").Find(CTX,filter,opts)
+	if err != nil{
+		return nil, err
+	}
+	a := []newModel.ExerciseAnswerUser{}
+	cur.All(CTX, &a)
+	//fmt.Println("a ", a)
+	return a, nil
+}

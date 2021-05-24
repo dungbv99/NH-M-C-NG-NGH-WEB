@@ -11,6 +11,9 @@ type ExerciseAnswerUser struct {
 	ExcerciseNumberQuestion				string						`json:"ExcerciseNumberQuestion" bson:"ExcerciseNumberQuestion"`
 	ExcerciseName						string						`json:"ExcerciseName" bson:"ExcerciseName"`
 	ExcerciseDescription				string						`json:"ExcerciseDescription" bson:"ExcerciseDescription"`
+	DoTime								int							`json:"DoTime" bson:"DoTime"`
+	S 									int 						`json:"S" bson:"S"`
+	Name 								string						`json:"Name", bson:"Name"`
 }
 
 type ExerciseAnswerContent struct {

@@ -11,7 +11,7 @@ import (
 )
 
 func Register(c *routefw.Context){
-	fmt.Println("register")
+	//fmt.Println("register")
 	user := &newModel.User{}
 	err := c.DecodeJson(user)
 	if err != nil{
@@ -27,7 +27,7 @@ func Register(c *routefw.Context){
 
 	result := db.FindOne("user", filter)
 	if result.Err() == nil{
-		fmt.Println("existed-username")
+		//fmt.Println("existed-username")
 		response := newModel.ResponseValidate{CheckValidate: "existed-username"}
 		c.JSON(http.StatusOK, response)
 		return
@@ -39,7 +39,7 @@ func Register(c *routefw.Context){
 	}
 	result = db.FindOne("user",filter)
 	if result.Err() == nil{
-		fmt.Println("existed-phonenumber")
+		//fmt.Println("existed-phonenumber")
 		response := newModel.ResponseValidate{CheckValidate: "existed-phonenumber"}
 		c.JSON(http.StatusOK, response)
 		return
@@ -50,7 +50,7 @@ func Register(c *routefw.Context){
 	if err != nil{
 		c.JSON(http.StatusInternalServerError, err.Error())
 	}else{
-		fmt.Println( "success-register")
+		//fmt.Println( "success-register")
 		r := newModel.ResponseValidate{CheckValidate:  "success-register"}
 		c.JSON(http.StatusCreated, r)
 	}

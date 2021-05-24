@@ -138,6 +138,24 @@ var routers = []MyRoute{
 		method: "post",
 		handler: controller.GetExerciseUserResult,
 	},
+	{
+		name: 	"delete exercise",
+		path:  	"/deleteExerciseByName/",
+		method: "post",
+		handler: controller.DeleteExercise,
+	},
+	{
+		name: 	"Get Num Rank Page",
+		path:  	"/getNumRankPage/",
+		method: "post",
+		handler: controller.GetNumRankPage,
+	},
+	{
+		name: 	"Get Rank Page",
+		path:  	"/getRank/",
+		method: "post",
+		handler: controller.GetRank,
+	},
 }
 
 

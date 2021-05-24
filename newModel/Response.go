@@ -34,5 +34,21 @@ type ResponseUserExerciseResult struct {
 	ExcerciseNumberQuestion				string					`json:"ExcerciseNumberQuestion" `
 	ExcerciseQAContent					[]ExcerciseQAContent	`json:"ExcerciseQAContent" `
 	ExcerciseAllAnswerContent			[]ExerciseAnswerContent	`json:"ExcerciseAllAnswerContent" "`
+	//DoTime								int						`json:"DoTime"`
+}
 
+type ResponseNumberPageRank struct {
+	Num								int64 						`json:"Num"`
+	Name 							string						`json:"Name"`
+}
+
+type ResponseRank struct {
+	DoTime							int							`json:"DoTime"`
+	Name 							string						`json:"Name"`
+	Score 							string						`json:"Score"`
+}
+
+type ResRankPage struct {
+	ResponseNumberPageRank			ResponseNumberPageRank		`json:"r1"`
+	List 							[]ResponseRank				`json:"r2"`
 }

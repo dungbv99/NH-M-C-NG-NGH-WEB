@@ -47,6 +47,7 @@ func GetExerciseUserResult(c *routefw.Context){
 		ExcerciseNumberQuestion:   exercise.ExcerciseNumberQuestion,
 		ExcerciseQAContent:        exercise.ExcerciseQAContent,
 		ExcerciseAllAnswerContent: exerciseAnswerUser.ExcerciseAllAnswerContent,
+		//DoTime: 				   exerciseAnswerUser.DoTime,
 	}
 	//fmt.Println("res ", res)
 	c.JSON(http.StatusOK, res)
