@@ -24,7 +24,14 @@ export default class TeamMainContent extends React.Component {
       case "files":
         return <TeamFiles />;
       case "notes":
-        return <TeamNotes />;
+        return (
+          <TeamNotes
+            MemberID={this.props.MemberID}
+            TeamID={this.props.TeamID}
+            socket={this.props.socket}
+            ChooseTeamInfor={this.props.ChooseTeamInfor}
+          />
+        );
       case "settings":
         return <TeamSettings />;
       default:

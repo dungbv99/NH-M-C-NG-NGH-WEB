@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { useCookies } from 'react-cookie';
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -69,26 +70,52 @@ export default class Login extends React.Component {
   };
 
   sendRequestToLogin = () => {
-    axios
-      .post("/login/", {
+    // axios
+    //   .post("/login/", {
+    //     Username: this.state.Username,
+    //     PassWord: this.state.PassWord
+    //   })
+    //   .then(res => {
+    //     // console.log(res.data);
+    //     this.setState({
+    //       checkValidate: res.data.checkValidate
+    //     });
+    //     if (res.data.checkValidate === "success-login") {
+    //       setTimeout(() => {
+    //         this.props.updateRenderLogPage("User");
+    //       }, 1000);
+    //       this.props.setMemberIDForMemberLogin(res.data.MemberID);
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+
+    fetch("/login/", {
+      method: "POST",
+      body: JSON.stringify({
         Username: this.state.Username,
         PassWord: this.state.PassWord
-      })
-      .then(res => {
-        // console.log(res.data);
-        this.setState({
-          checkValidate: res.data.checkValidate
-        });
-        if (res.data.checkValidate === "success-login") {
-          setTimeout(() => {
-            this.props.updateRenderLogPage("User");
-          }, 1000);
-          this.props.setMemberIDForMemberLogin(res.data.MemberID);
+      }),
+    })
+        .then(response => {
+          if (!response.ok) throw Error(response.statusText);
+          return response.json();
+        })
+        .then(data => {
+              this.setState({
+                checkValidate: data.checkValidate
+              });
+              if (data.checkValidate === "success-login") {
+                setTimeout(() => {
+                  this.props.updateRenderLogPage("User");
+                }, 1000);
+                this.props.setMemberIDForMemberLogin(data.MemberID);
+              }
         }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+
+        )
+        .catch(error => console.log(error));
   };
 
   renderLoginForm = () => {

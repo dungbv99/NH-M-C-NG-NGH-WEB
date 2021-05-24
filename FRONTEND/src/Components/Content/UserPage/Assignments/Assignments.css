@@ -1,0 +1,340 @@
+.user-assignments {
+    height: 100%;
+    user-select: none;
+}
+
+.user-assignments_all {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* height: 100%; */
+}
+
+.user-assignments_all__control {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(218, 218, 218);
+}
+
+.user-assignments_all__control___title {
+    width: 60%;
+    text-align: left;
+    font-weight: bold;
+    margin: 0 0 0 24px;
+    user-select: none;
+}
+
+.user-assignments_all__control___button {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.user-assignments_all__control___button button {
+    height: 32px;
+    margin: 0 32px 0 -28px;
+    border-style: groove;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.user-assignments_create {
+    height: 100%;
+    width: 100%;
+}
+
+.user-assignments_create__backtoassignmentall {
+    margin: 40px 0 0 40px;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px tomato;
+    transition: box-shadow 0.3s;
+}
+
+.user-assignments_create__backtoassignmentall:hover {
+    color: red;
+    box-shadow: 0 3px rgb(0, 255, 64);
+}
+
+.user-assignments_create__assignment {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.user-assignments_create__assignment p {
+    user-select: none;
+}
+
+.user-assignments_create__assignment___form {
+    background-color: rgb(255, 255, 255);
+    margin: 8px 0 0 120px;
+    width: 64%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.user-assignments_create__assignment___form input {
+    width: 100%;
+}
+
+.user-assignments_create__assignment___form div:first-child {
+    width: 72%;
+}
+
+.user-assignments_create__assignment___form div:last-child button {
+    border-style: groove;
+    border-radius: 4px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.user-assignments_create__assignment___form div:last-child button:focus {
+    background-color: rgb(196, 196, 196);
+}
+
+.user-assignments_create__assignment___form p {
+    font-weight: bold;
+    text-align: left;
+}
+
+.user-assignments_create__assignment___form input {
+    border: none;
+    border-bottom: groove;
+    border-color: rgb(226, 226, 226);
+}
+
+.user-assignments_create__assignment___form input:focus {
+    outline: none;
+    border-color: green
+}
+
+.user-assignments_create__assignment___form select {
+    width: 40%;
+    border: none;
+    border-bottom: groove;
+}
+
+.user-assignments_create__assignment___form option {
+    border-color: rgb(226, 226, 226);
+}
+
+.user-assignments_create__assignment___form select:focus {
+    outline: none;
+    border-color: green
+}
+
+.user-assignments_create__assignment___response-create-assignment {
+    height: 0px;
+    width: 100%;
+    margin: 0px 0 40px 0;
+    color: green;
+    font-weight: bold;
+}
+
+.user-assignments_create__assignment___validate div {
+    color: red;
+}
+
+.user-assignments_create__assignment___validate div {
+    width: 400px;
+}
+
+.user-assignments_create__assignment___form____create-button input {
+    border: solid 1px black;
+    cursor: pointer;
+    height: 32px;
+    width: 160px;
+    margin: 32px 0 0 160px;
+    font-weight: bold;
+}
+
+.user-assignments_create__assignment___form____create-button input:hover {
+    color: rgb(255, 2, 2);
+}
+
+.user-assignments_create__assignment___form____create-button input:focus {
+    color: rgb(91, 2, 255);
+}
+
+.user-assignments_create__assignment___warning {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.user-assignments_create__assignment___warning div:first-child {
+    border: groove;
+    margin: 20px 0 0 0;
+    float: left;
+}
+
+.user-assignments_create__assignment___warning div:first-child img {
+    height: 180px;
+    width: 180px;
+}
+
+.user-assignments_create__assignment___warning div:last-child p {
+    font-weight: bold;
+    margin: 12px 0 0 -8px;
+}
+
+.user-assignments_all__list {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 4px 0 0 0;
+    user-select: none;
+}
+
+.user-assignments_all__list___finished {
+    width: 48%;
+    height: 496px;
+    border: 2px solid black;
+    border-radius: 8px;
+    overflow: auto;
+    margin: 0 4px 0 0;
+}
+
+.user-assignments_all__list___unfinished {
+    width: 48%;
+    height: 496px;
+    border: 2px solid black;
+    border-radius: 8px;
+    overflow: auto;
+    margin: 0 0 0 4px;
+}
+
+.user-assignments_all__list___un-finished____assignment-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.user-assignments_all__list___un-finished____assignment-item img {
+    width: 60px;
+    height: 40px;
+    border-radius: 20px;
+    margin: 0 8px 0 0;
+}
+
+.user-assignments_all__list___un-finished____assignment-item div:nth-child(2) {
+    /* width: 100%; */
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border: groove;
+    border-radius: 20px;
+    margin: 12px 0 0 0;
+    width: 92%;
+    height: 40px;
+    cursor: pointer;
+    flex-grow: 0;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____content div:first-child {
+    width: 8%;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____content div:nth-child(2) {
+    width: 12%;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____content div:nth-child(3) {
+    width: 96%;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____content div:last-child {
+    width: 12%;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____content p {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.user-assignments_all__list___control-item i {
+    font-size: 56px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.user-assignments_all__list___control-item i:hover {
+    color: blue;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 1px solid black;
+    width: 88%;
+    border-radius: 4px;
+    border-top: none;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____detail div {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 0 0 4px;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____detail______create-end-date {
+    width: 100%;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____detail span {
+    font-weight: bold;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____detail______create-end-date div:first-child {
+    width: 64%;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____detail______content-delete {
+    width: 100%;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____detail______content-delete div:first-child {
+    width: 88%;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____detail______content-delete_______delete {
+    border-bottom: 2px solid;
+    border-bottom-color: black;
+    color: rgb(255, 0, 0);
+    cursor: pointer;
+}
+
+.user-assignments_all__list___un-finished____assignment-item_____detail______content-delete_______delete:hover {
+    color: blue;
+}

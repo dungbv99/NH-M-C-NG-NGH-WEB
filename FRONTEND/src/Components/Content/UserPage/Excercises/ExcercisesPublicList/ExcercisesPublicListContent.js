@@ -35,41 +35,49 @@ export default class ExcercisesPublicListContent extends React.Component {
 
   componentDidMount = () => {
 // <<<<<<< HEAD
-    axios
-        .get("/getAllExercise/")
-        .then(res => {
-          console.log(",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, res ", res);
+//     axios
+//         .get("/getAllExercise/")
+//         .then(res => {
+//           const allNumberOfExcerciseOnPageList = [];
+//           const ExcerciseListLength = res.data.list.length;
+//
+//           const allNumberOfExcercise = Math.ceil(
+//               ExcerciseListLength / Number(this.state.NumberExcerciseOnPage)
+//           );
+//
+//           for (let i = 1; i <= allNumberOfExcercise; i++) {
+//             allNumberOfExcerciseOnPageList.push(i + "");
+//           }
+//           this.setState({
+//             AllExcercisePublicList: res.data.list,
+//             AllNumberOfExcerciseOnPageList: allNumberOfExcerciseOnPageList
+//           });
+//         })
+//         .catch(error => {
+//           console.log(error);
+//         });
 
-          // console.log(".......................................................... list", this.state.AllExcercisePublicList);
-          console.log("ccccccccccccccccccccccccccccccccccccccccccc   ", this.state.AllExcercisePublicList );
-          const allNumberOfExcerciseOnPageList = [];
-          const ExcerciseListLength = res.data.list.length;
+    fetch("/getAllExercise/",{
+      method: "GET",
+    }).then(response => {
+      if (!response.ok) throw Error(response.statusText);
+      return response.json();
+    }).then(data =>{
+      const allNumberOfExcerciseOnPageList = [];
+      const ExcerciseListLength = data.list.length;
 
-          const allNumberOfExcercise = Math.ceil(
-              ExcerciseListLength / Number(this.state.NumberExcerciseOnPage)
-          );
+      const allNumberOfExcercise = Math.ceil(
+          ExcerciseListLength / Number(this.state.NumberExcerciseOnPage)
+      );
 
-          for (let i = 1; i <= allNumberOfExcercise; i++) {
-            allNumberOfExcerciseOnPageList.push(i + "");
-          }
-          this.setState({
-            AllExcercisePublicList: res.data.list,
-            AllNumberOfExcerciseOnPageList: allNumberOfExcerciseOnPageList
-          });
-          // console.log("AllNumberOfExcerciseOnPageList         jjjjjjjjjj", this.state.AllNumberOfExcerciseOnPageList);
-          // window.location.reload();
-
-        })
-        .catch(error => {
-          console.log(error);
-        });
-// =======
-    console.log("Sao nó lại ko ra đây nhỉ????????????");
-    // const allNumberOfExcerciseOnPageList = [];
-    // const ExcerciseListLength = this.state.AllExcercisePublicList.length;
-// >>>>>>> b6b92fc7d07e50a798175e81a5374e4fb8ad04ef
-
-
+      for (let i = 1; i <= allNumberOfExcercise; i++) {
+        allNumberOfExcerciseOnPageList.push(i + "");
+      }
+      this.setState({
+        AllExcercisePublicList: data.list,
+        AllNumberOfExcerciseOnPageList: allNumberOfExcerciseOnPageList
+      });
+    }).catch(error => console.log(error));
   };
 
   chooseIndexExcercisePage = event => {
@@ -188,6 +196,13 @@ export default class ExcercisesPublicListContent extends React.Component {
     );
   };
 
+  choiceExcerciseOwnedItemToDetail = excerciseID => {
+    console.log("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
+    this.props.updateRenderExcerciseOwnedControl("publicitem");
+    this.props.getExcerciseOwnedIDMemberChoice(excerciseID);
+  };
+
+
   renderChooseIndexExcercisePublicList = () => {
     const currentIndexExcercisePage = Number(
         this.state.CurrentIndexExcercisePage
@@ -212,7 +227,9 @@ export default class ExcercisesPublicListContent extends React.Component {
                       <div
                           key={excerciseindex}
                           onClick={() =>
-                              this.props.updateRenderExcercisePublicControl("publicitem")
+                              this.choiceExcerciseOwnedItemToDetail(
+                                  excercisenameitem.ExcerciseID
+                              )
                           }
                       >
                         <img

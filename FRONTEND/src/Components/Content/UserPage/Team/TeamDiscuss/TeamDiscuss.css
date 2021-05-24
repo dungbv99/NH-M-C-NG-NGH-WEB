@@ -64,8 +64,9 @@
 
 .user-team_team-menu-and-content__content___discuss_____alldiscuss_____discuss_______discussbox________content {
     width: 100%;
-    height: 40px;
-    margin: -8px 0 0 0;
+    max-height: 240px;
+    overflow: auto;
+    margin: 8px 0 0 0;
     border-bottom: 1px solid rgb(216, 216, 216);
 }
 

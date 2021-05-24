@@ -6,7 +6,7 @@ export default class TeamsAddCodeTeam extends React.Component {
     super(props);
     this.state = {
       TeamCodeToJoin: "",
-      checkValidate:""
+      checkValidate: ""
     };
   }
 
@@ -50,9 +50,14 @@ export default class TeamsAddCodeTeam extends React.Component {
       })
       .then(res => {
         // console.log(res.data);
-          this.setState({
-            checkValidate: res.data
-          });
+        this.setState({
+          checkValidate: res.data
+        });
+        if (res.data === "success-joined") {
+          setTimeout(() => {
+            this.props.updateRenderTeamControl("teamall");
+          }, 1000);
+        }
       })
       .catch(error => {
         console.log(error);

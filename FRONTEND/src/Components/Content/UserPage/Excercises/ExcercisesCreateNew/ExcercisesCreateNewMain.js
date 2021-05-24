@@ -37,7 +37,7 @@ export default class RemindersCreateNew extends React.Component {
       ExcerciseName: "",
       ExcerciseDescription: "",
       ExcerciseNumberQuestion: "1",
-      ExcerciseType: "public"
+      ExcerciseType: "public",
     };
   }
 
@@ -98,30 +98,54 @@ export default class RemindersCreateNew extends React.Component {
 
   sentToCreateNewReminder = () => {
     console.log("111");
-    axios
-      .post("/createnewexcercisecontent/", {
+    // axios
+    //   .post("/createnewexcercisecontent/", {
+    //     ExcerciseName: this.state.ExcerciseName,
+    //     ExcerciseDescription: this.state.ExcerciseDescription,
+    //     ExcerciseLogo: this.state.setExcerciseLogoChoose,
+    //     ExcerciseType: this.state.ExcerciseType,
+    //     ExcerciseNumberQuestion: this.state.ExcerciseNumberQuestion
+    //   })
+    //   .then(res => {
+    //     console.log("2222 ", res);
+    //
+    //     this.setState({
+    //       checkValidate: res.data.checkValidate
+    //     });
+    //     if (res.data.checkValidate === "exist") {
+    //       this.openHavedExcerciseNameModal();
+    //     } else {
+    //       this.openConfirmCreateModal();
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+
+    fetch("/createnewexcercisecontent/", {
+      method: "POST",
+      body: JSON.stringify({
         ExcerciseName: this.state.ExcerciseName,
         ExcerciseDescription: this.state.ExcerciseDescription,
-        ExcerciseLogo: this.state.ExcerciseLogo,
-        // ExcerciseCreateMemberID: this.props.MemberID,
+        ExcerciseLogo: this.state.setExcerciseLogoChoose,
         ExcerciseType: this.state.ExcerciseType,
         ExcerciseNumberQuestion: this.state.ExcerciseNumberQuestion
-      })
-      .then(res => {
-        console.log("2222 ", res);
-
-        this.setState({
-          checkValidate: res.data.checkValidate
-        });
-        if (res.data.checkValidate === "exist") {
-          this.openHavedExcerciseNameModal();
-        } else {
-          this.openConfirmCreateModal();
+      }),
+    }).then(response => {
+      if (!response.ok) throw Error(response.statusText);
+      return response.json();
+    }).then(
+        data =>{
+          this.setState({
+            checkValidate: data.checkValidate
+          });
+          if (data.checkValidate === "exist") {
+            this.openHavedExcerciseNameModal();
+          } else {
+            this.openConfirmCreateModal();
+          }
         }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    )
   };
 
 
@@ -197,37 +221,37 @@ export default class RemindersCreateNew extends React.Component {
                   onChange={event => this.handleValueCreateNewExcercise(event)}
                   value={this.state.ExcerciseNumberQuestion}
                 />
-                <p>Chọn chế độ hiển thị Bộ đề</p>
-                <div className="user-excercises_create__excercise___form____radio-button">
-                  <div>
-                    <input
-                      type="radio"
-                      name="ExcerciseType"
-                      value="public"
-                      defaultChecked
-                      onChange={event =>
-                        this.handleValueCreateNewExcercise(event)
-                      }
-                    />
-                  </div>
-                  <div>
-                    <span>Công khai</span>
-                  </div>
+                {/*<p>Chọn chế độ hiển thị Bộ đề</p>*/}
+                {/*<div className="user-excercises_create__excercise___form____radio-button">*/}
+                {/*  <div>*/}
+                {/*    <input*/}
+                {/*      type="radio"*/}
+                {/*      name="ExcerciseType"*/}
+                {/*      value="public"*/}
+                {/*      defaultChecked*/}
+                {/*      onChange={event =>*/}
+                {/*        this.handleValueCreateNewExcercise(event)*/}
+                {/*      }*/}
+                {/*    />*/}
+                {/*  </div>*/}
+                {/*  <div>*/}
+                {/*    <span>Công khai</span>*/}
+                {/*  </div>*/}
 
-                  <div>
-                    <input
-                      type="radio"
-                      name="ExcerciseType"
-                      value="private"
-                      onChange={event =>
-                        this.handleValueCreateNewExcercise(event)
-                      }
-                    />
-                  </div>
-                  <div>
-                    <span>Riêng tư</span>
-                  </div>
-                </div>
+                {/*  <div>*/}
+                {/*    <input*/}
+                {/*      type="radio"*/}
+                {/*      name="ExcerciseType"*/}
+                {/*      value="private"*/}
+                {/*      onChange={event =>*/}
+                {/*        this.handleValueCreateNewExcercise(event)*/}
+                {/*      }*/}
+                {/*    />*/}
+                {/*  </div>*/}
+                {/*  <div>*/}
+                {/*    <span>Riêng tư</span>*/}
+                {/*  </div>*/}
+                {/*</div>*/}
 
                 <p>Chọn logo cho Bộ đề - Bài tập </p>
                 <select

@@ -39,6 +39,9 @@ export default class ExcercisesAllList extends React.Component {
             updateRenderExcerciseControl={
               this.props.updateRenderExcerciseControl
             }
+            getExcerciseIDAndTimeMemberChoice={
+                this.props.getExcerciseIDAndTimeMemberChoice
+            }
           />
         );
       case "privatelist":

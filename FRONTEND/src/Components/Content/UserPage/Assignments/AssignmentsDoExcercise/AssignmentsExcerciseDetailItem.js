@@ -3,55 +3,15 @@ import React from "react";
 import Modal from "react-modal";
 
 import de110 from "../../../../Main/Image-Icons/de110.PNG";
-import axios from "axios";
-export default class ExcercisesOwnedDetailItem extends React.Component {
+export default class AssignmentsExcerciseDetailItem extends React.Component {
   constructor(props) {
     super(props);
-    console.log("props ", props)
     this.state = {
-      checkOwnedExcerciseItem: true,
+      checkOwnedExcerciseItem: false,
       checkConfirmDoExcercisesChoiceIsOpen: false,
       checkTimeToDoExcercise: false,
-      TimeToDoExcercise: "0",
-      e : "",
+      TimeToDoExcercise: "0"
     };
-  }
-
-  componentDidMount = () =>{
-    // axios.post("/getExerciseById/", {
-    //   id: this.props.ExcerciseID
-    // }).then(res => {
-    //
-    //   this.setState({
-    //     e: res.data.exercise
-    //   })
-    // }).catch(
-    //     error => {
-    //       console.log(error)
-    //     }
-    // )
-
-    fetch("/getExerciseById/", {
-      method: "POST",
-      body: JSON.stringify({
-        id: this.props.ExcerciseID
-      }),
-    }).then(response => {
-      if (!response.ok) throw Error(response.statusText);
-      return response.json();
-    }).then(
-        data => {
-          this.setState({
-
-            e: data.exercise,
-            dataLoad: true
-          })
-        }
-    ).catch(
-        error => {
-          console.log(error)
-        }
-    );
   }
 
   openConfirmDoExcercisesChoiceModal = () => {
@@ -90,6 +50,7 @@ export default class ExcercisesOwnedDetailItem extends React.Component {
         checkTimeToDoExcercise: true
       });
     } else {
+      console.log("Vào đây rồi");
       this.props.updateRenderExcerciseControl("excercisedoexcercise");
       this.props.getExcerciseIDAndTimeMemberChoice(
         this.props.ExcerciseID,
@@ -108,12 +69,7 @@ export default class ExcercisesOwnedDetailItem extends React.Component {
     }
   };
 
-  seenExcerciseItemScoreBoard = () => {this.props.getExcerciseOwnedIDMemberChoice(this.props.ExcerciseID);
-    this.props.updateRenderExcerciseOwnedControl("owneditemscoreboard");
-  };
-
   renderExcerciseOWnedDetailItemContent = () => {
-    // console.log("22222222   ", this.state.e);
     return (
       <div>
         <div
@@ -131,44 +87,44 @@ export default class ExcercisesOwnedDetailItem extends React.Component {
         </div>
         <div className="user-excercises_all-list__owned-list___owned-item_____excercise-logo-and-content">
           <div className="user-excercises_all-list__owned-list___owned-item_____excercise-logo">
-            <img src={this.state.e.ExcerciseLogo} />
-            <p>Mô tả: {this.state.e.ExcerciseDescription}</p>
+            <img src={de110} />
+            <p>Mô tả: fkasjfakakakakakakakak</p>
           </div>
           <div className="user-excercises_all-list__owned-list___owned-item_____excercise-content">
             <div>
-              <p>Tên Bộ đề - Bài tập &nbsp;&nbsp; : {this.state.e.ExcerciseName}</p>
-              <p>Số lượng câu hỏi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : {this.state.e.ExcerciseNumberQuestion}</p>
-              {/*<p>Loại Bộ đề - Bài tập &nbsp; : Công khai</p>*/}
+              <p>Tên Bộ đề - Bài tập &nbsp;&nbsp; : Kiến quốc vĩ nghiệp</p>
+              <p>Số lượng câu hỏi &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 20</p>
+              <p>Loại Bộ đề - Bài tập &nbsp; : Công khai</p>
             </div>
             <div>
-              {/*<button*/}
-              {/*  style={*/}
-              {/*    this.state.checkOwnedExcerciseItem*/}
-              {/*      ? { backgroundColor: "chocolate" }*/}
-              {/*      : { backgroundColor: "white" }*/}
-              {/*  }*/}
-              {/*  onClick={() => this.changeCheckOwnedExcerciseItem()}*/}
-              {/*>*/}
-                {/*{(this.state.checkOwnedExcerciseItem && (*/}
-                {/*  <div className="user-excercises_all-list__owned-list___owned-item____button-choose">*/}
-                {/*    <div>*/}
-                {/*      <i className="material-icons">{"done"}</i>*/}
-                {/*    </div>*/}
-                {/*    <div>*/}
-                {/*      <span> Đã sở hữu</span>*/}
-                {/*    </div>*/}
-                {/*  </div>*/}
-                {/*)) || (*/}
-                {/*  <div className="user-excercises_all-list__owned-list___owned-item____button-choose">*/}
-                {/*    <div>*/}
-                {/*      <i className="material-icons">{"add"}</i>*/}
-                {/*    </div>*/}
-                {/*    <div>*/}
-                {/*      <span> Thêm Bộ đề - Bài tập</span>*/}
-                {/*    </div>*/}
-                {/*  </div>*/}
-                {/*)}*/}
-              {/*</button>*/}
+              <button
+                style={
+                  this.state.checkOwnedExcerciseItem
+                    ? { backgroundColor: "chocolate" }
+                    : { backgroundColor: "white" }
+                }
+                onClick={() => this.changeCheckOwnedExcerciseItem()}
+              >
+                {(this.state.checkOwnedExcerciseItem && (
+                  <div className="user-excercises_all-list__owned-list___owned-item____button-choose">
+                    <div>
+                      <i className="material-icons">{"done"}</i>
+                    </div>
+                    <div>
+                      <span> Đã sở hữu</span>
+                    </div>
+                  </div>
+                )) || (
+                  <div className="user-excercises_all-list__owned-list___owned-item____button-choose">
+                    <div>
+                      <i className="material-icons">{"add"}</i>
+                    </div>
+                    <div>
+                      <span> Thêm Bộ đề - Bài tập</span>
+                    </div>
+                  </div>
+                )}
+              </button>
               <button
                 style={
                   this.state.checkOwnedExcerciseItem
@@ -186,19 +142,6 @@ export default class ExcercisesOwnedDetailItem extends React.Component {
                   </div>
                   <div>
                     <span>&nbsp;Làm Bài tập - Bộ đề</span>
-                  </div>
-                </div>
-              </button>
-              <button
-                  style={{ margin: "0 0 0 40px" }}
-                  onClick={() => this.seenExcerciseItemScoreBoard()}
-              >
-                <div className="user-excercises_all-list__owned-list___owned-item____button-choose">
-                  <div>
-                    <i className="material-icons">{"assessment"}</i>
-                  </div>
-                  <div>
-                    <span> Xem xếp hạng</span>
                   </div>
                 </div>
               </button>

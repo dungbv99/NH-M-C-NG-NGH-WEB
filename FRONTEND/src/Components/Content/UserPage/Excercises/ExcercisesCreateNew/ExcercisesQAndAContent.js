@@ -21,6 +21,14 @@ export default class ExcercisesQAndAContent extends React.Component {
     };
   }
 
+  componentDidMount = () => {
+    if (this.props.ExcerciseNumberQuestion === "1") {
+      this.setState({
+        checkValidateNextRight: true
+      });
+    }
+  };
+
   openCheckCompleteExcerciseModal = () => {
     this.setState({
       checkCompleteExcerciseIsOpen: true
@@ -153,27 +161,51 @@ export default class ExcercisesQAndAContent extends React.Component {
   };
 
   sendAllQAndAExcerciseContent = () => {
-    console.log("this.state.ExcerciseQAContent ",this.state.ExcerciseQAContent);
-    console.log("this.state.ExcerciseName ",this.props.ExcerciseName);
-    axios
-      .post("/updateexcerciseqa/", {
+    // console.log("this.state.ExcerciseQAContent ",this.state.ExcerciseQAContent);
+    // console.log("this.state.ExcerciseName ",this.props.ExcerciseName);
+    // axios
+    //   .post("/updateexcerciseqa/", {
+    //     ExcerciseName: this.props.ExcerciseName,
+    //     ExcerciseQAContent: this.state.ExcerciseQAContent
+    //   })
+    //   .then(res => {
+    //     // console.log(res.data);
+    //     this.setState({
+    //       checkValidate: res.data.checkValidate
+    //     });
+    //     if (res.data.checkValidate === "success-create-excercise-content") {
+    //       setTimeout(() => {
+    //         this.props.updateRenderExcerciseControl("excerciseall");
+    //       }, 1000);
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+
+    fetch("/updateexcerciseqa/",{
+      method:"POST",
+      body: JSON.stringify({
         ExcerciseName: this.props.ExcerciseName,
         ExcerciseQAContent: this.state.ExcerciseQAContent
-      })
-      .then(res => {
-        // console.log(res.data);
-        this.setState({
-          checkValidate: res.data.checkValidate
-        });
-        if (res.data.checkValidate === "success-create-excercise-content") {
-          setTimeout(() => {
-            this.props.updateRenderExcerciseControl("excerciseall");
-          }, 1000);
+      }),
+    }).then(response => {
+      if (!response.ok) throw Error(response.statusText);
+      return response.json();
+    }).then(
+        data =>{
+          this.setState({
+            checkValidate: data.checkValidate
+          });
+          if (data.checkValidate === "success-create-excercise-content") {
+            setTimeout(() => {
+              this.props.updateRenderExcerciseControl("excerciseall");
+            }, 1000);
+          }
         }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    ).catch(error => {
+      console.log(error);
+    });
   };
 
   sendToCompleteExcercises = () => {

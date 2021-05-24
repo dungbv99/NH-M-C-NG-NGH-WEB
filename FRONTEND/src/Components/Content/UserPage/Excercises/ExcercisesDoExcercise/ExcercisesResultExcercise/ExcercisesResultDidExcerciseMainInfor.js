@@ -1,39 +1,44 @@
 import React from "react";
 import Modal from "react-modal";
 
-export default class ExcercisesDoExcerciseMainInfor extends React.Component {
+export default class ExcercisesResultDidExcerciseMainInfor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { checkDestroyDoExcerciseIsOpen: false };
+    this.state = { checkBackResultExcerciseIsOpen: false };
   }
 
-  openCheckDestroyDoExcerciseModal = () => {
+  openCheckBackResultExcerciseModal = () => {
     this.setState({
-      checkDestroyDoExcerciseIsOpen: true
+      checkBackResultExcerciseIsOpen: true
     });
   };
 
-  closeCheckDestroyDoExcerciseModal = () => {
+  closeCheckBackResultExcerciseModal = () => {
     this.setState({
-      checkDestroyDoExcerciseIsOpen: false
+      checkBackResultExcerciseIsOpen: false
     });
+  };
+
+  returnToExcerciseResultExcercise = () => {
+    this.props.updateRenderExcerciseDoExcerciseControl("finishexcercise");
+    this.props.getExcerciseDidIDMemberDone(this.props.ExcerciseDidID);
   };
 
   render() {
     return (
-      <div className="user-excercises_do-excercise__QandA">
+      <div className="user-excercises_do-excercise__QandA-result___main">
         <div
-          className="user-excercises_do-excercise__QandA___backtoexcerciseall"
-          onClick={() => this.openCheckDestroyDoExcerciseModal()}
+          className="user-excercises_do-excercise__QandA-result___main____backtoexcerciseall"
+          onClick={() => this.openCheckBackResultExcerciseModal()}
         >
           <div>
             <i className="material-icons"> &#xe5c4;</i>
           </div>
           <div>
-            <span>Hủy làm bài </span>
+            <span>Quay trở lại Xem kết quả </span>
           </div>
         </div>
-        <div className="user-excercises_do-excercise__QandA___infor">
+        <div className="user-excercises_do-excercise__QandA-result___infor">
           <div>
             <img src={this.props.ExcerciseLogo} alt="excercise-logo" />
           </div>
@@ -44,7 +49,10 @@ export default class ExcercisesDoExcerciseMainInfor extends React.Component {
             <p>Số lượng câu hỏi: {this.props.ExcerciseNumberQuestion}</p>
           </div>
           <div>
-            <p>Loại Bộ đề - Bài tập: {this.props.ExcerciseType}</p>
+            <p>
+              Loại Bộ đề - Bài tập:&nbsp;
+              {this.props.ExcerciseType === "public" ? "Công khai" : "Riêng tư"}
+            </p>
           </div>
         </div>
 
@@ -61,27 +69,24 @@ export default class ExcercisesDoExcerciseMainInfor extends React.Component {
             }
           }}
           ariaHideApp={false}
-          isOpen={this.state.checkDestroyDoExcerciseIsOpen}
-          onRequestClose={this.closeCheckDestroyDoExcerciseModal}
+          isOpen={this.state.checkBackResultExcerciseIsOpen}
+          onRequestClose={this.closeCheckBackResultExcerciseModal}
         >
           <div>
             <p style={{ fontWeight: "bold", color: "red" }}>CẢNH BÁO </p>
             <p style={{ fontWeight: "bold" }}>
-              Khi hủy quá trình làm bài sẽ hủy toàn bộ quá trình làm bài của
-              bạn. Bạn có chắc chắn muốn hủy quá trình làm bài không???
+              Bạn có muốn trở lại giao diện xem kết quả không?
             </p>
           </div>
           <button
             style={{ float: "right", cursor: "pointer" }}
-            onClick={() => this.closeCheckDestroyDoExcerciseModal()}
+            onClick={() => this.closeCheckBackResultExcerciseModal()}
           >
             Hủy bỏ
           </button>
           <button
             style={{ float: "right", cursor: "pointer" }}
-            onClick={() =>
-              this.props.updateRenderExcerciseControl("excerciseall")
-            }
+            onClick={() => this.returnToExcerciseResultExcercise()}
           >
             Chắc chắn!!!
           </button>

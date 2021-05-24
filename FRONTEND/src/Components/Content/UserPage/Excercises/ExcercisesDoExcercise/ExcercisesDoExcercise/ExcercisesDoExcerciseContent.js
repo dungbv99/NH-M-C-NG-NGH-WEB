@@ -9,6 +9,7 @@ import ExcerciseCountDownTimeToFinishedExcercise from "./ExcercisesCountDownTime
 export default class ExcercisesDoExcerciseContent extends React.Component {
   constructor(props) {
     super(props);
+    console.log("1111111   sss", props);
     this.state = {
       ExcerciseAllAnswerContent: [],
       ExcerciseNthQuestion: "1",
@@ -18,9 +19,18 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
       checkCompleteExcerciseIsOpen: false,
       checkCountDownToTimeUp: false,
       checkDidAnswerQuestIsOpen: false,
-      checkDidAnswerQuest: false
+      checkDidAnswerQuest: false,
+
     };
   }
+
+  componentDidMount = () => {
+    if (this.props.ExcerciseNumberQuestion === "1") {
+      this.setState({
+        checkValidateNextRight: true
+      });
+    }
+  };
 
   openCheckDidAnswerQuestModal = () => {
     this.setState({
@@ -58,8 +68,14 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
     });
   };
 
+  setCheckDidAnswerQuest = () => {
+    this.setState({
+      checkDidAnswerQuest: true
+    });
+  };
+
   nextToNthQuestionOnRight = () => {
-    if (!this.state.checkDidAnswerQuest) {
+    if (this.state.checkDidAnswerQuest) {
       this.openCheckDidAnswerQuestModal();
     } else {
       if (!this.state.checkValidateNextRight) {
@@ -72,28 +88,11 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
           });
         }
 
-        let nthindex = this.state.ExcerciseAllAnswerContent.findIndex(
-          nthitem => {
-            return (
-              nthitem.ExcerciseNthQuestion ===
-              Number(this.state.ExcerciseNthQuestion) + 1 + ""
-            );
-          }
-        );
-
-        if (nthindex >= 0) {
-          this.setState({
-            ExcerciseNthQuestion:
-              Number(this.state.ExcerciseNthQuestion) + 1 + "",
-            checkValidatePrevLeft: false
-          });
-        } else {
-          this.setState({
-            ExcerciseNthQuestion:
-              Number(this.state.ExcerciseNthQuestion) + 1 + "",
-            checkValidatePrevLeft: false
-          });
-        }
+        this.setState({
+          ExcerciseNthQuestion:
+            Number(this.state.ExcerciseNthQuestion) + 1 + "",
+          checkValidatePrevLeft: false
+        });
       } else {
         this.openOverNumberQuestionModal();
       }
@@ -101,7 +100,7 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
   };
 
   prevToNthQuestionOnLeft = () => {
-    if (!this.state.checkDidAnswerQuest) {
+    if (this.state.checkDidAnswerQuest) {
       this.openCheckDidAnswerQuestModal();
     } else {
       if (!this.state.checkValidatePrevLeft) {
@@ -109,31 +108,16 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
           this.setState({
             checkValidatePrevLeft: true
           });
-        } else {
-          this.setState({
-            ExcerciseNthQuestion:
-              Number(this.state.ExcerciseNthQuestion) - 1 + "",
-            checkValidateNextRight: false
-          });
         }
-      } else {
-        this.openOverNumberQuestionModal();
-      }
-    }
-    if (!this.state.checkValidatePrevLeft) {
-      if (Number(this.state.ExcerciseNthQuestion) - 1 + "" === "1") {
-        this.setState({
-          checkValidatePrevLeft: true
-        });
-      } else {
+
         this.setState({
           ExcerciseNthQuestion:
             Number(this.state.ExcerciseNthQuestion) - 1 + "",
           checkValidateNextRight: false
         });
+      } else {
+        this.openOverNumberQuestionModal();
       }
-    } else {
-      this.openOverNumberQuestionModal();
     }
   };
 
@@ -154,7 +138,7 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
       this.state.ExcerciseAllAnswerContent.splice(nthindex, 1, AnswerContent);
       this.setState({
         ExcerciseAllAnswerContent: this.state.ExcerciseAllAnswerContent,
-        checkDidAnswerQuest: true
+        checkDidAnswerQuest: false
       });
     } else {
       this.setState({
@@ -162,43 +146,71 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
           ...this.state.ExcerciseAllAnswerContent,
           AnswerContent
         ],
-        checkDidAnswerQuest: true
+        checkDidAnswerQuest: false
       });
     }
   };
 
   sendToFinishedExcerciseChoice = () => {
-    axios
-      .post("/finishedexcercisechoice", {
+    // axios
+    //   .post("/finishedExerciseChoice/", {
+    //     ExcerciseID: this.props.ExcerciseID,
+    //     ExcerciseAllAnswerContent: this.state.ExcerciseAllAnswerContent,
+    //     UserId : this.props.MemberID
+    //   })
+    //   .then(res => {
+    //     this.setState({
+    //       checkValidate: res.data.checkValidate
+    //     });
+    //     if (res.data.checkValidate === "success-finished-excercise-choice") {
+    //       this.props.getExcerciseDidIDMemberDone(res.data.ExcerciseDidID);
+    //       this.props.updateRenderExcerciseDoExcerciseControl(
+    //           "finishexcercise"
+    //       );
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+
+    fetch("/finishedExerciseChoice/", {
+      method: "POST",
+      body: JSON.stringify({
         ExcerciseID: this.props.ExcerciseID,
-        ExcerciseAllAnswerContent: this.state.ExcerciseAllAnswerContent
-      })
-      .then(res => {
-        // console.log(res.data);
-        this.setState({
-          checkValidate: res.data.checkValidate
-        });
-        if (res.data.checkValidate === "success-finished-excercise-choice") {
-          setTimeout(() => {
+        ExcerciseAllAnswerContent: this.state.ExcerciseAllAnswerContent,
+        UserId : this.props.MemberID
+      }),
+    }).then(response => {
+      if (!response.ok) throw Error(response.statusText);
+      return response.json();
+    }).then(
+        data =>{
+          this.setState({
+            checkValidate: data.checkValidate
+          });
+          if (data.checkValidate === "success-finished-excercise-choice") {
+            this.props.getExcerciseDidIDMemberDone(data.ExcerciseDidID);
             this.props.updateRenderExcerciseDoExcerciseControl(
-              "finishexcercise"
+                "finishexcercise"
             );
-          }, 1500);
+          }
         }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    )
   };
 
   sendToCompleteDoExcerciseChoice = () => {
+    console.log("this.state.ExcerciseAllAnswerContent.length ", this.state.ExcerciseAllAnswerContent.length );
+    console.log("this.props.ExcerciseNumberQuestion ", this.props.ExcerciseNumberQuestion);
     if (
-      this.state.ExcerciseQAContent.length() !==
+      this.state.ExcerciseAllAnswerContent.length !=
       this.props.ExcerciseNumberQuestion
     ) {
+      console.log("33333333333333333333333333333333333333333");
       this.openCheckCompleteExcerciseModal();
     } else {
+      console.log("222222222222222222222222222222222222222222");
       this.sendToFinishedExcerciseChoice();
+      // this.props.updateRenderExcerciseDoExcerciseControl("finishexcercise");
     }
   };
 
@@ -235,7 +247,7 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
           <input
             type="button"
             value="Hoàn tất"
-            onClick={() => this.sendToCompleteExcercises()}
+            onClick={() => this.sendToCompleteDoExcerciseChoice()}
           />
         </div>
       </div>
@@ -243,13 +255,25 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
   };
 
   renderExcercisesDoExcerciseContentItem = () => {
+    console.log("xxxxxxxxxxxx this.props.ExcerciseAllQAContent ", this.props.ExcerciseAllQAContent)
+    // console.log("")
     let nthindex = this.props.ExcerciseAllQAContent.findIndex(questansitem => {
+      // console.log("questansitem.ExcerciseNthQuestion  ", questansitem.ExcerciseNthQuestion);
+      // console.log("this.state.ExcerciseNthQuestion", this.state.ExcerciseNthQuestion);
       return (
         questansitem.ExcerciseNthQuestion === this.state.ExcerciseNthQuestion
       );
     });
 
-    if (this.state.ExcerciseAllAnswerContent[nthindex]) {
+    let nthanswerindex = this.state.ExcerciseAllAnswerContent.findIndex(
+      questansitem => {
+        return (
+          questansitem.ExcerciseNthQuestion === this.state.ExcerciseNthQuestion
+        );
+      }
+    );
+
+    if (this.state.ExcerciseAllAnswerContent[nthanswerindex]) {
       return (
         <ExcercisesDoExcerciseContentItem
           ExcerciseNthQuestion={this.state.ExcerciseNthQuestion}
@@ -275,13 +299,19 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
             this.props.ExcerciseAllQAContent[nthindex].ExcerciseAnswerContentD
           }
           ExcerciseChoiceAnswer={
-            this.state.ExcerciseAllAnswerContent[nthindex].ExcerciseChoiceAnswer
+            this.state.ExcerciseAllAnswerContent[nthanswerindex]
+              .ExcerciseChoiceAnswer
           }
+          setCheckDidAnswerQuest={this.setCheckDidAnswerQuest}
         />
       );
     } else {
+      console.log("11111  this.props.ExcerciseAllQAContent   ", this.props.ExcerciseAllQAContent);
+      console.log("2222 ", nthindex)
       return (
+
         <ExcercisesDoExcerciseContentItem
+
           ExcerciseNthQuestion={this.state.ExcerciseNthQuestion}
           getAllAnswerExcerciseOfMemberContent={
             this.getAllAnswerExcerciseOfMemberContent
@@ -305,6 +335,7 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
             this.props.ExcerciseAllQAContent[nthindex].ExcerciseAnswerContentD
           }
           ExcerciseChoiceAnswer=""
+          setCheckDidAnswerQuest={this.setCheckDidAnswerQuest}
         />
       );
     }
@@ -389,14 +420,27 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
             <p style={{ fontWeight: "bold", color: "red" }}>NHẮc NHỞ</p>
             <p style={{ fontWeight: "bold" }}>
               Bạn chưa hoàn thành nội dung cho tất cả các câu hỏi có trong Bộ đề
-              - Bài tập !!!
+              - Bài tập. Bạn có chính xác muốn nộp bài không ???
             </p>
           </div>
           <button
             style={{ float: "right", cursor: "pointer" }}
+            onClick={() =>{
+              this.props.updateRenderExcerciseDoExcerciseControl(
+                  "finishexcercise"
+              )
+              console.log("aaaassadasdasdasdasdadassaasdasas");
+            }
+
+            }
+          >
+            Nộp bài
+          </button>
+          <button
+            style={{ float: "right", cursor: "pointer" }}
             onClick={() => this.closeCheckCompleteExcerciseModal()}
           >
-            Đã hiểu!!!
+            Ấn nhầm!!!
           </button>
         </Modal>
         {/*================================================================================= */}
@@ -419,8 +463,8 @@ export default class ExcercisesDoExcerciseContent extends React.Component {
           <div>
             <p style={{ fontWeight: "bold", color: "red" }}>NHẮc NHỞ</p>
             <p style={{ fontWeight: "bold" }}>
-              Bạn chưa làm hoặc chưa xác nhận trả lời câu số
-              {Number(this.state.ExcerciseNthQuestion) - 1 + ""} này !!!
+              Bạn chưa xác nhận trả lời câu hỏi số &nbsp;
+              {this.state.ExcerciseNthQuestion} này !!!
             </p>
           </div>
           <button

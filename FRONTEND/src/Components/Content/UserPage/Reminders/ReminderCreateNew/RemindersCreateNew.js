@@ -106,7 +106,7 @@ export default class RemindersCreateNew extends React.Component {
                   type="text"
                   name="ReminderName"
                   onChange={event => this.handleValueCreateNewReminder(event)}
-                  placeholder="Nhập tên nhóm..."
+                  placeholder="Nhập tên nhắc nhở..."
                 />
                 <p>Mô tả nội dung nhắc nhở</p>
                 <input

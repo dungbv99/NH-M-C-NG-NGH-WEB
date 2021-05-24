@@ -34,38 +34,44 @@ export default class UserDashBoard extends React.Component {
   };
 
   componentDidMount = () => {
-    console.log("this.props.MemberID  ", this.props.MemberID);
-    axios
-      .post("/getfullname/", {
-        MemberID: this.props.MemberID
-      })
-      .then(res => {
-        console.log("...................... ",res.data);
-        this.setState({
-          FirstnameMember: res.data.Firstname,
-          LastnameMember: res.data.Lastname
-        });
-      })
-      .catch(error => {
-        console.log("111111111");
+    // console.log("this.props.MemberID  ", this.props.MemberID);
+    // axios
+    //   .post("/getfullname/", {
+    //     MemberID: this.props.MemberID
+    //   })
+    //   .then(res => {
+    //     console.log("...................... ",res.data);
+    //     this.setState({
+    //       FirstnameMember: res.data.Firstname,
+    //       LastnameMember: res.data.Lastname
+    //     });
+    //   })
+    //   .catch(error => {
+    //     console.log("111111111");
+    //     console.log(error);
+    //   });
+
+      fetch("/getfullname/",{
+        method: "POST",
+        body: JSON.stringify({
+          MemberID: this.props.MemberID
+        }),
+      }).then(response => {
+        if (!response.ok) throw Error(response.statusText);
+        return response.json();
+      }).then(
+          data =>{
+            this.setState({
+              FirstnameMember: data.Firstname,
+              LastnameMember: data.Lastname
+            });
+          }
+      ).catch(error => {
         console.log(error);
       });
 
-    // this.props.socket.emit("sent-online-memberID", {
-    //   MemberID: this.props.MemberID
-    //   // data: "Sao méo nhận được"
-    // });
 
-    // this.props.socket.on("confirm-joined-call-team", data => {
-    //   // console.log("check ra data " + data);
-    //   if (this.props.socket.id === data.MemberSocketID) {
-    //     // console.log("có vào nha");
-    //     this.setState({
-    //       checkJoinCall: "true",
-    //       TeamCallID: data.TeamCallID
-    //     });
-    //   }
-    // });
+
   };
 
   renderUserDashBoard = () => {

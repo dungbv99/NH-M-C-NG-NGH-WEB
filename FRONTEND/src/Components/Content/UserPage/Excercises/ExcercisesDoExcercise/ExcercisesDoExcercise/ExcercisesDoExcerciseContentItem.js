@@ -47,6 +47,9 @@ export default class ExcercisesDoExcerciseContentItem extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     });
+    if (event.target.value !== "") {
+      this.props.setCheckDidAnswerQuest();
+    }
   };
 
   handleValueExcerciseToAllAnswerContent = () => {
@@ -77,7 +80,7 @@ export default class ExcercisesDoExcerciseContentItem extends React.Component {
     }
   };
 
-  createNewExcerciseQAContent = () => {
+  doNewExcerciseQAContent = () => {
     return (
       <div className="user-excercises_do-excercise__QandA___content">
         <div className="user-excercises_do-excercise__QandA___content___question">
@@ -251,6 +254,6 @@ export default class ExcercisesDoExcerciseContentItem extends React.Component {
   };
 
   render() {
-    return <div>{this.createNewExcerciseQAContent()}</div>;
+    return <div>{this.doNewExcerciseQAContent()}</div>;
   }
 }

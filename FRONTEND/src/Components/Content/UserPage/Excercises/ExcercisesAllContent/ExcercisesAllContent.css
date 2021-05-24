@@ -334,3 +334,40 @@
 }
 
 /*================================================================*/
+
+.user-excercises_all-list__owned-list___owned-item_____backtoowneditem {
+    margin: 40px 0 0 40px;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px tomato;
+    transition: box-shadow 0.3s;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____backtoowneditem:hover {
+    color: red;
+    box-shadow: 0 3px rgb(0, 255, 64);
+}
+
+.user-excercises_all-list__owned-list___owned-item_____table-list {
+    margin: 40px 0 0 0;
+    font-weight: bold;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____table-list table {
+    width: 100%;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____table-list table th {
+    font-size: 20px;
+}
+
+.user-excercises_all-list__owned-list___owned-item_____table-list table td {
+    margin: 20px 0 0 0;
+    color: rgb(25, 0, 255);
+}

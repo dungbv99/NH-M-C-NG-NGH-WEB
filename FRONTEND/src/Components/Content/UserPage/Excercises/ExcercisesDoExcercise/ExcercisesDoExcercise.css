@@ -425,3 +425,99 @@
     background-color: rgb(219, 219, 219);
     cursor: pointer;
 }
+
+.user-excercises_do-excercise__result-excercise {
+    user-select: none;
+}
+
+.user-excercises_do-excercise__result-excercise___title {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.user-excercises_do-excercise__result-excercise___title p {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.user-excercises_do-excercise__result-excercise___content {
+    margin: 0 0 0 280px;
+    text-align: left;
+}
+
+.user-excercises_do-excercise__result-excercise___content p {
+    font-weight: bold;
+}
+
+.user-excercises_do-excercise__result-excercise___button-choose {
+    margin: 80px 0 0 0;
+}
+
+.user-excercises_do-excercise__result-excercise___button-choose input {
+    cursor: pointer;
+    height: 40px;
+}
+
+.user-excercises_do-excercise__QandA-result {
+    width: 100%;
+}
+
+.user-excercises_do-excercise__QandA-result___main____backtoexcerciseall {
+    margin: 40px 0 0 40px;
+    border: none;
+    width: 240px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-shadow: 0 2px tomato;
+    transition: box-shadow 0.3s;
+}
+
+.user-excercises_do-excercise__QandA-result___main____backtoexcerciseall:hover {
+    color: red;
+    box-shadow: 0 3px rgb(0, 255, 64);
+}
+
+.user-excercises_do-excercise__QandA-result___infor {
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+.user-excercises_do-excercise__QandA-result___infor div:nth-child(2) {
+    width: 42%;
+}
+
+.user-excercises_do-excercise__QandA-result___infor img {
+    width: 60px;
+    height: 60px;
+    border: groove;
+}
+
+.user-excercises_do-excercise__QandA-result___infor div {
+    margin: 16px 0 0 40px;
+}
+
+
+.user-excercises_do-excercise__QandA-result___control {
+    margin: 80px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-excercises_do-excercise__QandA-result___control i {
+    font-weight: bold;
+    color: blue;
+    cursor: pointer;
+    margin: 0 32px 0 32px;
+    user-select: none;
+}

@@ -104,6 +104,35 @@ export default class Register extends React.Component {
       .catch(error => {
         console.log(error);
       });
+
+
+    fetch("/register/",{
+      method: "POST",
+      body: JSON.stringify({
+        Username: this.state.Username,
+        PassWord: this.state.PassWord,
+        Firstname: this.state.Firstname,
+        Lastname: this.state.Lastname,
+        PhoneNumber: this.state.PhoneNumber,
+        Birthday: this.state.Birthday,
+        Gender: this.state.Gender
+      }),
+    }).then(response => {
+      if (!response.ok) throw Error(response.statusText);
+      return response.json();
+    }).then(
+          data => {
+            this.setState({
+              checkValidate: data.checkValidate
+            });
+
+            if(data.checkValidate === "success-register"){
+              setTimeout(() => {
+                this.props.updateLoginPage("login");
+              }, 1500);
+            }
+          }
+      ).catch(error => console.log(error));
   };
 
   renderRegisterForm = () => {

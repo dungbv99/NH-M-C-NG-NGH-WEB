@@ -5,13 +5,16 @@ import de111 from "../../../../Main/Image-Icons/de111.PNG";
 
 import "./ExcercisesDoExcercise.css";
 
-import ExcercisesDoExcerciseContent from "./ExcercisesDoExcerciseContent";
-import ExcercisesResultExcerciseContent from "./ExcercisesResultExcerciseContent";
+import ExcercisesDoExcerciseContent from "./ExcercisesDoExcercise/ExcercisesDoExcerciseContent";
+import ExcercisesResultExcerciseContent from "./ExcercisesResultExcercise/ExcercisesResultExcerciseContent";
+import ExcercisesResultDidExcerciseContent from "./ExcercisesResultExcercise/ExcercisesResultDidExcerciseContent";
 
 export default class ExcercisesDoExcercise extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
+      dataLoad : false,
       chooseExcerciseDoOrFinished: "doexcercise",
       ExcerciseAllQAContent: [
         {
@@ -72,30 +75,52 @@ export default class ExcercisesDoExcercise extends React.Component {
       ExcerciseName: "công nghệ web",
       ExcerciseNumberQuestion: "5",
       ExcerciseType: "public",
-      ExcerciseLogo: de111
+      ExcerciseLogo: de111,
+      e : "",
     };
   }
+  componentDidMount = () =>{
+    // axios.post("/getExerciseById/", {
+    //   id: this.props.ExcerciseID
+    // }).then(res => {
+    //   console.log("res.data.exercise   ", res.data.exercise)
+    //   this.setState({
+    //
+    //     e: res.data.exercise,
+    //     dataLoad: true
+    //   })
+    // }).catch(
+    //     error => {
+    //       console.log(error)
+    //     }
+    // )
 
-  // componentDidMount = () => {
-  //   axios
-  //     .post("/getquestionanswercontent", {
-  //       MemberID: this.props.MemberID,
-  //       ExcerciseID: this.props.ExcerciseID
-  //     })
-  //     .then(res => {
-  //       console.log(res.data);
-  //       this.setState({
-  //         ExcerciseAllQAContent: res.data.ExcerciseAllQAContent,
-  //         ExcerciseName: res.data.ExcerciseName,
-  //         ExcerciseNumberQuestion: res.data.ExcerciseAllQAContent,
-  //         ExcerciseType: res.data.ExcerciseAllQAContent,
-  //         ExcerciseLogo: res.data.ExcerciseAllQAContent
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  // };
+    fetch("/getExerciseById/", {
+      method: "POST",
+      body: JSON.stringify({
+        id: this.props.ExcerciseID
+      }),
+    }).then(response => {
+        if (!response.ok) throw Error(response.statusText);
+        return response.json();
+      }).then(
+          data => {
+            this.setState({
+
+              e: data.exercise,
+              dataLoad: true
+            })
+          }
+      ).catch(
+          error => {
+            console.log(error)
+          }
+      );
+
+
+  }
+
+
 
   updateRenderExcerciseDoExcerciseControl = state => {
     this.setState({
@@ -103,7 +128,19 @@ export default class ExcercisesDoExcercise extends React.Component {
     });
   };
 
+  getExcerciseDidIDMemberDone = excerciseDidID => {
+    this.setState({
+      ExcerciseDidID: excerciseDidID
+    });
+  };
+
   renderExcerciseDoExcersiceDoOrFinished = () => {
+    console.log("1   ", this.state.e);
+    console.log("2   ", this.state.e.ExcerciseName);
+    console.log("3   ", this.state.e.ExcerciseNumberQuestion);
+    console.log("4   ", this.state.e.ExcerciseType);
+    console.log("5   ", this.state.e.ExcerciseLogo);
+    console.log("6   ", this.state.e.ExcerciseQAContent);
     switch (this.state.chooseExcerciseDoOrFinished) {
       case "doexcercise":
         return (
@@ -115,12 +152,13 @@ export default class ExcercisesDoExcercise extends React.Component {
             updateRenderExcerciseControl={
               this.props.updateRenderExcerciseControl
             }
-            ExcerciseAllQAContent={this.state.ExcerciseAllQAContent}
+            getExcerciseDidIDMemberDone={this.getExcerciseDidIDMemberDone}
+            ExcerciseAllQAContent={this.state.e.ExcerciseQAContent}
             TimeToDoExcercise={this.props.TimeToDoExcercise}
-            ExcerciseName={this.state.ExcerciseName}
-            ExcerciseNumberQuestion={this.state.ExcerciseNumberQuestion}
-            ExcerciseType={this.state.ExcerciseType}
-            ExcerciseLogo={this.state.ExcerciseLogo}
+            ExcerciseName={this.state.e.ExcerciseName}
+            ExcerciseNumberQuestion={this.state.e.ExcerciseNumberQuestion}
+            ExcerciseType={this.state.e.ExcerciseType}
+            ExcerciseLogo={this.state.e.ExcerciseLogo}
             ExcerciseID={this.props.ExcerciseID}
           />
         );
@@ -136,13 +174,15 @@ export default class ExcercisesDoExcercise extends React.Component {
             updateRenderExcerciseControl={
               this.props.updateRenderExcerciseControl
             }
+            ExcerciseDidID={this.state.ExcerciseDidID}
             ExcerciseID={this.props.ExcerciseID}
             TimeToDoExcercise={this.props.TimeToDoExcercise}
           />
         );
-      default:
+
+      case "excerciseresultdidexcercise":
         return (
-          <ExcercisesDoExcerciseContent
+          <ExcercisesResultDidExcerciseContent
             MemberID={this.props.MemberID}
             socket={this.props.socket}
             updateRenderExcerciseDoExcerciseControl={
@@ -151,23 +191,47 @@ export default class ExcercisesDoExcercise extends React.Component {
             updateRenderExcerciseControl={
               this.props.updateRenderExcerciseControl
             }
-            ExcerciseAllQAContent={this.state.ExcerciseAllQAContent}
-            TimeToDoExcercise={this.props.TimeToDoExcercise}
-            ExcerciseName={this.state.ExcerciseName}
-            ExcerciseNumberQuestion={this.state.ExcerciseNumberQuestion}
-            ExcerciseType={this.state.ExcerciseType}
-            ExcerciseLogo={this.state.ExcerciseLogo}
+            getExcerciseDidIDMemberDone={this.getExcerciseDidIDMemberDone}
+            ExcerciseDidID={this.state.ExcerciseDidID}
             ExcerciseID={this.props.ExcerciseID}
+            TimeToDoExcercise={this.props.TimeToDoExcercise}
           />
+        );
+      default:
+        return (
+            <ExcercisesDoExcerciseContent
+                MemberID={this.props.MemberID}
+                updateRenderExcerciseDoExcerciseControl={
+                  this.updateRenderExcerciseDoExcerciseControl
+                }
+                updateRenderExcerciseControl={
+                  this.props.updateRenderExcerciseControl
+                }
+                getExcerciseDidIDMemberDone={this.getExcerciseDidIDMemberDone}
+                ExcerciseAllQAContent={this.state.e.ExcerciseQAContent}
+                TimeToDoExcercise={this.props.TimeToDoExcercise}
+                ExcerciseName={this.state.e.ExcerciseName}
+                ExcerciseNumberQuestion={this.state.e.ExcerciseNumberQuestion}
+                ExcerciseType={this.state.e.ExcerciseType}
+                ExcerciseLogo={this.state.e.ExcerciseLogo}
+                ExcerciseID={this.props.ExcerciseID}
+            />
         );
     }
   };
 
   render() {
-    return (
-      <div className="user-excercises_do-excercise">
-        {this.renderExcerciseDoExcersiceDoOrFinished()}
-      </div>
-    );
+    if(this.state.dataLoad){
+      return (
+          <div className="user-excercises_do-excercise">
+            {this.renderExcerciseDoExcersiceDoOrFinished()}
+          </div>
+      );
+    }else{
+      return (
+          <div></div>
+      )
+    }
+
   }
 }

@@ -16,6 +16,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    user-select: none;
 }
 
 .user-dashboard_header__logo {
@@ -99,6 +100,7 @@
     font-weight: bold;
     background-color: rgb(27, 27, 27);
     color: white;
+    user-select: none;
 }
 
 .user-dashboard_footer a {
