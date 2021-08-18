@@ -24,7 +24,7 @@ Then start mongodb at port 27017. And run server:
 
 <h2>FrontEnd: </h2>
 Install npm env:
-
+- `cd FRONTEND`
 - `npm install`
 
 Run client:
